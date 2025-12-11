@@ -25,7 +25,28 @@ DB_CONNECTION=sqlite
 
 Choose one of the following email providers:
 
-#### Option A: Mailgun (Recommended - Free tier available)
+#### Option A: ZeptoMail (Recommended - 10,000 emails/month free)
+```env
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.zeptomail.com
+MAIL_PORT=587
+MAIL_USERNAME=emailapikey
+MAIL_PASSWORD=your-zeptomail-send-token
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="noreply@yourdomain.com"
+MAIL_FROM_NAME="BAME CRM"
+```
+
+**Setup Steps:**
+1. Sign up at https://www.zoho.com/zeptomail/
+2. Verify your domain in ZeptoMail dashboard
+3. Add DNS records (SPF, DKIM, CNAME) provided by ZeptoMail
+4. Go to **Mail Agents** → **SMTP** → Create new SMTP user
+5. Copy the **Send Token** (use as MAIL_PASSWORD)
+6. Username is always `emailapikey`
+7. Verify sender address in ZeptoMail dashboard
+
+#### Option B: Mailgun (Free tier: 5,000 emails/month)
 ```env
 MAIL_MAILER=mailgun
 MAIL_FROM_ADDRESS="noreply@yourdomain.com"
@@ -41,7 +62,7 @@ MAILGUN_ENDPOINT=api.mailgun.net
 3. Get your API key from dashboard
 4. Add DNS records (SPF, DKIM, CNAME)
 
-#### Option B: SendGrid (Reliable, 100 emails/day free)
+#### Option C: SendGrid (Reliable, 100 emails/day free)
 ```env
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.sendgrid.net
@@ -59,7 +80,7 @@ MAIL_FROM_NAME="BAME CRM"
 3. Verify sender identity
 4. Add API key to `.env`
 
-#### Option C: AWS SES (Cost-effective for high volume)
+#### Option D: AWS SES (Cost-effective for high volume)
 ```env
 MAIL_MAILER=ses
 AWS_ACCESS_KEY_ID=your-aws-key
@@ -75,7 +96,7 @@ MAIL_FROM_NAME="BAME CRM"
 3. Request production access (starts in sandbox)
 4. Create IAM user with SES permissions
 
-#### Option D: Generic SMTP
+#### Option E: Generic SMTP
 ```env
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.yourdomain.com

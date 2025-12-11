@@ -96,7 +96,27 @@ API_KEY_SALT=YOUR_SECURE_RANDOM_STRING_HERE
 
 #### Email Configuration (Choose One)
 
-**Option A: Mailgun (Recommended)**
+**Option A: ZeptoMail (Recommended - 10,000 emails/month free)**
+```bash
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.zeptomail.com
+MAIL_PORT=587
+MAIL_USERNAME=emailapikey
+MAIL_PASSWORD=your-zeptomail-send-token
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=noreply@bamecrm.online
+MAIL_FROM_NAME="BAME CRM"
+```
+
+**Setup Steps for ZeptoMail:**
+1. Sign up at https://www.zoho.com/zeptomail/
+2. Verify your domain (add SPF, DKIM, CNAME records to your DNS)
+3. Go to **Mail Agents** → **SMTP** → Create new SMTP user
+4. Copy the **Send Token** (this is your MAIL_PASSWORD)
+5. Username is always `emailapikey`
+6. Verify sender address: noreply@bamecrm.online
+
+**Option B: Mailgun**
 ```bash
 MAIL_MAILER=mailgun
 MAIL_FROM_ADDRESS=noreply@bamecrm.online
@@ -106,7 +126,7 @@ MAILGUN_SECRET=your-mailgun-api-key
 MAILGUN_ENDPOINT=api.mailgun.net
 ```
 
-**Option B: SendGrid**
+**Option C: SendGrid**
 ```bash
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.sendgrid.net
@@ -118,7 +138,7 @@ MAIL_FROM_ADDRESS=noreply@bamecrm.online
 MAIL_FROM_NAME="BAME CRM"
 ```
 
-**Option C: Generic SMTP**
+**Option D: Generic SMTP**
 ```bash
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.yourdomain.com
