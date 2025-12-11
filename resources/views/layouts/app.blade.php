@@ -213,7 +213,7 @@
             </header>
 
             <!-- Page Content -->
-            <main class="flex-1 overflow-y-auto bg-gray-50 px-6 pb-6 {{ request()->routeIs('dashboard') && auth()->user()->role === 'consultant' ? 'pt-0' : 'pt-6' }}">
+            <main class="flex-1 overflow-y-auto bg-gray-50 px-6 py-6">
                 {{ $slot }}
             </main>
         </div>
