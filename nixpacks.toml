@@ -3,10 +3,7 @@ nixPkgs = ['php82', 'php82Packages.composer', 'nodejs_20', 'sqlite']
 
 [phases.install]
 cmds = [
-  'export APP_URL=https://bamecrm.online',
-  'export COOLIFY_URL=https://bamecrm.online',
-  'export COOLIFY_FQDN=https://bamecrm.online',
-  'composer install --optimize-autoloader --no-dev',
+  'APP_URL=https://bamecrm.online COOLIFY_URL=https://bamecrm.online COOLIFY_FQDN=https://bamecrm.online composer install --optimize-autoloader --no-dev',
   'npm ci',
   'npm run build'
 ]
