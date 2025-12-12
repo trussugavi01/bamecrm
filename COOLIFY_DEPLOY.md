@@ -183,10 +183,10 @@ In the **Health Check** tab:
 In the **Build** tab, add this post-deployment command:
 
 ```bash
-php artisan migrate --force && php artisan db:seed --class=DefaultUserSeeder --force
+php artisan migrate --force && php artisan db:seed --force
 ```
 
-**Note:** After the first deployment, you may want to remove the seeder part:
+**Note:** This will run the DatabaseSeeder which includes DefaultUserSeeder and DefaultPipelineSeeder. After the first deployment, you may want to remove the seeder part:
 
 ```bash
 php artisan migrate --force
