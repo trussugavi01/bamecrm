@@ -3,12 +3,15 @@
     <div class="fixed inset-0 bg-black bg-opacity-50" wire:click="close"></div>
 
     <!-- Modal -->
-    <div class="flex items-center justify-center min-h-screen p-4">
-        <div class="relative bg-gray-900 rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+    <div class="flex items-end sm:items-center justify-center min-h-screen p-0 sm:p-4">
+        <div class="relative bg-gray-900 rounded-t-2xl sm:rounded-lg shadow-xl w-full sm:max-w-2xl max-h-[95vh] sm:max-h-[90vh] overflow-y-auto">
+            <!-- Mobile drag handle -->
+            <div class="sm:hidden w-12 h-1.5 bg-gray-600 rounded-full mx-auto mt-3 mb-2"></div>
+            
             <!-- Header -->
-            <div class="flex items-center justify-between p-6 border-b border-gray-700">
+            <div class="flex items-center justify-between p-4 sm:p-6 border-b border-gray-700">
                 <div>
-                    <h2 class="text-xl font-bold text-white">{{ $dealId ? 'Edit Deal: ' . $company_name : 'Create New Deal' }}</h2>
+                    <h2 class="text-lg sm:text-xl font-bold text-white">{{ $dealId ? 'Edit Deal' : 'Create New Deal' }}</h2>
                     @if($dealId && $deal)
                         <p class="text-sm text-gray-400 mt-1">Last activity: {{ $deal->last_activity_at->diffForHumans() }}</p>
                     @endif
@@ -21,20 +24,20 @@
             </div>
 
             <!-- Form -->
-            <form wire:submit="save" class="p-6">
-                <div class="space-y-6">
+            <form wire:submit="save" class="p-4 sm:p-6">
+                <div class="space-y-4 sm:space-y-6">
                     <!-- Deal Information Section -->
                     <div>
                         <h3 class="text-sm font-semibold text-white uppercase tracking-wide mb-4">Deal Information</h3>
                         
-                        <div class="grid grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                             <!-- Company Name -->
-                            <div class="col-span-2">
+                            <div class="sm:col-span-2">
                                 <label class="block text-sm font-medium text-white mb-2">Company Name</label>
                                 <input 
                                     type="text" 
                                     wire:model="company_name"
-                                    class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-bame-pink"
+                                    class="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-bame-pink text-sm sm:text-base"
                                     placeholder="Acme Corporation"
                                 >
                                 @error('company_name') <span class="text-red-400 text-xs mt-1">{{ $message }}</span> @enderror
@@ -46,7 +49,7 @@
                                 <input 
                                     type="text" 
                                     wire:model="decision_maker_name"
-                                    class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-bame-pink"
+                                    class="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-bame-pink text-sm sm:text-base"
                                     placeholder="John Doe"
                                 >
                                 @error('decision_maker_name') <span class="text-red-400 text-xs mt-1">{{ $message }}</span> @enderror
@@ -58,7 +61,7 @@
                                 <input 
                                     type="email" 
                                     wire:model="decision_maker_email"
-                                    class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-bame-pink"
+                                    class="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-bame-pink text-sm sm:text-base"
                                     placeholder="john@acme.com"
                                 >
                                 @error('decision_maker_email') <span class="text-red-400 text-xs mt-1">{{ $message }}</span> @enderror
@@ -85,7 +88,7 @@
                                 <label class="block text-sm font-medium text-white mb-2">Tier</label>
                                 <select 
                                     wire:model="tier"
-                                    class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-bame-pink"
+                                    class="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-bame-pink text-sm sm:text-base"
                                 >
                                     <option value="">Select tier</option>
                                     <option value="Platinum">Platinum</option>
@@ -102,7 +105,7 @@
                                 <label class="block text-sm font-medium text-white mb-2">Stage</label>
                                 <select 
                                     wire:model="stage"
-                                    class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-bame-pink"
+                                    class="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-bame-pink text-sm sm:text-base"
                                 >
                                     @foreach(\App\Models\Sponsorship::STAGES as $stageOption)
                                         <option value="{{ $stageOption }}">{{ $stageOption }}</option>
@@ -136,7 +139,7 @@
                                 <label class="block text-sm font-medium text-white mb-2">Priority</label>
                                 <select 
                                     wire:model="priority"
-                                    class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-bame-pink"
+                                    class="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-bame-pink text-sm sm:text-base"
                                 >
                                     <option value="Hot">Hot</option>
                                     <option value="Warm">Warm</option>
@@ -150,7 +153,7 @@
                                 <label class="block text-sm font-medium text-white mb-2">Source</label>
                                 <select 
                                     wire:model="source"
-                                    class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-bame-pink"
+                                    class="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-bame-pink text-sm sm:text-base"
                                 >
                                     @foreach(\App\Models\Sponsorship::SOURCES as $sourceOption)
                                         <option value="{{ $sourceOption }}">{{ $sourceOption }}</option>
@@ -165,7 +168,7 @@
                                 <input 
                                     type="date" 
                                     wire:model="proposal_sent_date"
-                                    class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-bame-pink"
+                                    class="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-bame-pink text-sm sm:text-base"
                                 >
                                 @error('proposal_sent_date') <span class="text-red-400 text-xs mt-1">{{ $message }}</span> @enderror
                             </div>
@@ -176,19 +179,19 @@
                                 <input 
                                     type="date" 
                                     wire:model="contract_signed_date"
-                                    class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-bame-pink"
+                                    class="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-bame-pink text-sm sm:text-base"
                                 >
                                 @error('contract_signed_date') <span class="text-red-400 text-xs mt-1">{{ $message }}</span> @enderror
                             </div>
 
                             <!-- Loss Reason (if applicable) -->
                             @if($stage === 'Closed Lost')
-                                <div class="col-span-2">
+                                <div class="sm:col-span-2">
                                     <label class="block text-sm font-medium text-white mb-2">Loss Reason</label>
                                     <input 
                                         type="text" 
                                         wire:model="loss_reason"
-                                        class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-bame-pink"
+                                        class="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-bame-pink text-sm sm:text-base"
                                         placeholder="Reason for losing this deal"
                                     >
                                     @error('loss_reason') <span class="text-red-400 text-xs mt-1">{{ $message }}</span> @enderror
@@ -196,12 +199,12 @@
                             @endif
 
                             <!-- Notes -->
-                            <div class="col-span-2">
+                            <div class="sm:col-span-2">
                                 <label class="block text-sm font-medium text-white mb-2">Notes</label>
                                 <textarea 
                                     wire:model="notes"
                                     rows="4"
-                                    class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-bame-pink"
+                                    class="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-bame-pink text-sm sm:text-base"
                                     placeholder="Add any additional notes about this deal..."
                                 ></textarea>
                                 @error('notes') <span class="text-red-400 text-xs mt-1">{{ $message }}</span> @enderror
@@ -211,17 +214,17 @@
                 </div>
 
                 <!-- Footer -->
-                <div class="flex items-center justify-end space-x-3 mt-6 pt-6 border-t border-gray-700">
+                <div class="flex flex-col-reverse sm:flex-row items-center justify-end gap-3 sm:space-x-3 mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-gray-700">
                     <button 
                         type="button"
                         wire:click="close"
-                        class="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition"
+                        class="w-full sm:w-auto px-4 py-2.5 sm:py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition text-sm sm:text-base"
                     >
                         Cancel
                     </button>
                     <button 
                         type="submit"
-                        class="px-4 py-2 bg-bame-pink hover:bg-pink-600 text-white rounded-lg transition"
+                        class="w-full sm:w-auto px-4 py-2.5 sm:py-2 bg-bame-pink hover:bg-pink-600 text-white rounded-lg transition text-sm sm:text-base"
                         wire:loading.attr="disabled"
                     >
                         <span wire:loading.remove>Save Changes</span>

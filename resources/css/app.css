@@ -35,3 +35,109 @@
         @apply w-full rounded-lg bg-bame-dark border-gray-700 text-white placeholder-gray-400 focus:border-bame-pink focus:ring focus:ring-bame-pink focus:ring-opacity-50;
     }
 }
+
+@layer utilities {
+    /* Safe area insets for notched devices */
+    .safe-top {
+        padding-top: env(safe-area-inset-top);
+    }
+    .safe-bottom {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+    .safe-left {
+        padding-left: env(safe-area-inset-left);
+    }
+    .safe-right {
+        padding-right: env(safe-area-inset-right);
+    }
+    
+    /* Touch-friendly minimum sizes */
+    .touch-target {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* Smooth scrolling for mobile */
+    .scroll-smooth {
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
+    
+    /* Hide scrollbar but keep functionality */
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+    
+    /* Prevent text selection on touch */
+    .no-select {
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    
+    /* Active state for touch feedback */
+    .touch-active:active {
+        opacity: 0.7;
+        transform: scale(0.98);
+    }
+}
+
+/* Extra small breakpoint (xs: 475px) */
+@media (min-width: 475px) {
+    .xs\:inline {
+        display: inline !important;
+    }
+    .xs\:hidden {
+        display: none !important;
+    }
+    .xs\:flex {
+        display: flex !important;
+    }
+    .xs\:block {
+        display: block !important;
+    }
+    .xs\:text-sm {
+        font-size: 0.875rem !important;
+        line-height: 1.25rem !important;
+    }
+    .xs\:text-base {
+        font-size: 1rem !important;
+        line-height: 1.5rem !important;
+    }
+    .xs\:px-4 {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+    .xs\:py-2 {
+        padding-top: 0.5rem !important;
+        padding-bottom: 0.5rem !important;
+    }
+    .xs\:gap-3 {
+        gap: 0.75rem !important;
+    }
+}
+
+/* Improve tap highlight on mobile */
+@media (hover: none) and (pointer: coarse) {
+    * {
+        -webkit-tap-highlight-color: rgba(107, 70, 193, 0.1);
+    }
+    
+    button, a, [role="button"] {
+        cursor: pointer;
+    }
+    
+    /* Larger touch targets on mobile */
+    input[type="checkbox"],
+    input[type="radio"] {
+        min-width: 20px;
+        min-height: 20px;
+    }
+    
+    select {
+        min-height: 44px;
+    }
+}

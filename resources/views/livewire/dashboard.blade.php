@@ -1,64 +1,65 @@
-<div class="space-y-4">
+<div class="space-y-3 sm:space-y-4">
 @if(auth()->user()->role !== 'consultant')
     <!-- Welcome Header - Clean Light Design -->
-    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 sm:gap-4">
         <div>
-            <h1 class="text-2xl font-bold text-gray-900">
+            <h1 class="text-xl sm:text-2xl font-bold text-gray-900">
                 @php
                     $hour = now()->hour;
                     $greeting = $hour < 12 ? 'Good morning' : ($hour < 17 ? 'Good afternoon' : 'Good evening');
                 @endphp
                 {{ $greeting }}, {{ explode(' ', auth()->user()->name)[0] }}
             </h1>
-            <p class="text-gray-500 mt-1">Here's your sponsorship pipeline overview for today.</p>
+            <p class="text-gray-500 mt-1 text-sm sm:text-base">Here's your sponsorship pipeline overview for today.</p>
         </div>
-        <div class="flex items-center gap-3">
+        <div class="flex flex-wrap items-center gap-2 sm:gap-3">
             <!-- Period Selector -->
-            <div class="inline-flex rounded-lg bg-white border border-gray-200 p-1 shadow-sm">
-                <button wire:click="$set('dateRange', 'month')" class="px-4 py-1.5 text-sm font-medium rounded-md transition-all duration-200 {{ $dateRange === 'month' ? 'bg-purple-600 text-white shadow-sm' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50' }}">
+            <div class="inline-flex rounded-lg bg-white border border-gray-200 p-0.5 sm:p-1 shadow-sm">
+                <button wire:click="$set('dateRange', 'month')" class="px-2.5 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm font-medium rounded-md transition-all duration-200 {{ $dateRange === 'month' ? 'bg-purple-600 text-white shadow-sm' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50' }}">
                     Month
                 </button>
-                <button wire:click="$set('dateRange', 'quarter')" class="px-4 py-1.5 text-sm font-medium rounded-md transition-all duration-200 {{ $dateRange === 'quarter' ? 'bg-purple-600 text-white shadow-sm' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50' }}">
+                <button wire:click="$set('dateRange', 'quarter')" class="px-2.5 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm font-medium rounded-md transition-all duration-200 {{ $dateRange === 'quarter' ? 'bg-purple-600 text-white shadow-sm' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50' }}">
                     Quarter
                 </button>
-                <button wire:click="$set('dateRange', 'year')" class="px-4 py-1.5 text-sm font-medium rounded-md transition-all duration-200 {{ $dateRange === 'year' ? 'bg-purple-600 text-white shadow-sm' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50' }}">
+                <button wire:click="$set('dateRange', 'year')" class="px-2.5 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm font-medium rounded-md transition-all duration-200 {{ $dateRange === 'year' ? 'bg-purple-600 text-white shadow-sm' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50' }}">
                     Year
                 </button>
             </div>
-            <a href="{{ route('sponsorships.index') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-all shadow-sm">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <a href="{{ route('sponsorships.index') }}" class="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-purple-600 hover:bg-purple-700 text-white text-xs sm:text-sm font-medium rounded-lg transition-all shadow-sm">
+                <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                 </svg>
-                New Deal
+                <span class="hidden xs:inline">New Deal</span>
+                <span class="xs:hidden">New</span>
             </a>
         </div>
     </div>
 
     <!-- Quick Stats Bar -->
-    <div class="flex flex-wrap items-center gap-4">
-        <div class="flex items-center gap-2 bg-white border border-gray-200 rounded-lg px-4 py-2 shadow-sm">
+    <div class="flex flex-wrap items-center gap-2 sm:gap-4">
+        <div class="flex items-center gap-1.5 sm:gap-2 bg-white border border-gray-200 rounded-lg px-2.5 sm:px-4 py-1.5 sm:py-2 shadow-sm">
             <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-            <span class="text-sm font-medium text-gray-700">{{ $activeDeals }} Active Deals</span>
+            <span class="text-xs sm:text-sm font-medium text-gray-700">{{ $activeDeals }} Active</span>
         </div>
-        <div class="flex items-center gap-2 bg-white border border-gray-200 rounded-lg px-4 py-2 shadow-sm">
-            <svg class="w-4 h-4 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="flex items-center gap-1.5 sm:gap-2 bg-white border border-gray-200 rounded-lg px-2.5 sm:px-4 py-1.5 sm:py-2 shadow-sm">
+            <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
             </svg>
-            <span class="text-sm font-medium text-gray-700">{{ count($upcomingFollowUps) }} Follow-ups</span>
+            <span class="text-xs sm:text-sm font-medium text-gray-700">{{ count($upcomingFollowUps) }} Follow-ups</span>
         </div>
         @if(count($stagnantDeals) > 0)
-        <div class="flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-lg px-4 py-2">
-            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="flex items-center gap-1.5 sm:gap-2 bg-amber-50 border border-amber-200 rounded-lg px-2.5 sm:px-4 py-1.5 sm:py-2">
+            <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
             </svg>
-            <span class="text-sm font-medium text-amber-700">{{ count($stagnantDeals) }} Need Attention</span>
+            <span class="text-xs sm:text-sm font-medium text-amber-700">{{ count($stagnantDeals) }} Attention</span>
         </div>
         @endif
     </div>
 @endif
 
 <!-- KPI Cards Row - Colored Cards for Better Clarity -->
-<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
         <!-- Pipeline Value Card - Purple -->
         <div class="bg-gradient-to-br from-purple-600 to-purple-700 rounded-xl p-5 shadow-sm hover:shadow-lg transition-shadow">
             <div class="flex items-center justify-between mb-3">

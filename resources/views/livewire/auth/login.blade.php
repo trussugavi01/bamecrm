@@ -1,6 +1,6 @@
-<div class="min-h-screen flex">
-    <!-- Left Side - Gradient Background -->
-    <div class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-pink-500 via-purple-600 to-purple-800 relative overflow-hidden">
+<div class="min-h-screen flex flex-col lg:flex-row">
+    <!-- Left Side - Gradient Background (Hidden on mobile, shown as top banner on tablet) -->
+    <div class="hidden md:flex md:h-48 lg:h-auto lg:w-1/2 bg-gradient-to-br from-pink-500 via-purple-600 to-purple-800 relative overflow-hidden">
         <!-- Decorative waves -->
         <div class="absolute inset-0">
             <svg class="absolute bottom-0 left-0 w-full h-full" viewBox="0 0 1200 800" preserveAspectRatio="none">
@@ -12,25 +12,25 @@
     </div>
 
     <!-- Right Side - Login Form -->
-    <div class="w-full lg:w-1/2 flex items-center justify-center bg-gray-900 px-6 py-12">
+    <div class="flex-1 w-full lg:w-1/2 flex items-center justify-center bg-gray-900 px-4 sm:px-6 py-8 sm:py-12">
         <div class="w-full max-w-md">
             <!-- Logo/Icon -->
-            <div class="flex justify-center mb-8">
-                <div class="w-16 h-16 bg-bame-pink rounded-full flex items-center justify-center">
-                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex justify-center mb-6 sm:mb-8">
+                <div class="w-14 h-14 sm:w-16 sm:h-16 bg-bame-pink rounded-full flex items-center justify-center">
+                    <svg class="w-7 h-7 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
                     </svg>
                 </div>
             </div>
 
             <!-- Welcome Text -->
-            <div class="text-center mb-8">
-                <h1 class="text-3xl font-bold text-white mb-2">Welcome Back</h1>
-                <p class="text-gray-400">Sign in to manage your sponsorship lifecycle.</p>
+            <div class="text-center mb-6 sm:mb-8">
+                <h1 class="text-2xl sm:text-3xl font-bold text-white mb-2">Welcome Back</h1>
+                <p class="text-sm sm:text-base text-gray-400">Sign in to manage your sponsorship lifecycle.</p>
             </div>
 
             <!-- Login Form -->
-            <form wire:submit="login" class="space-y-6">
+            <form wire:submit="login" class="space-y-4 sm:space-y-6">
                 <!-- Email Field -->
                 <div>
                     <label for="email" class="block text-sm font-medium text-white mb-2">
@@ -40,7 +40,7 @@
                         type="email" 
                         id="email" 
                         wire:model="email"
-                        class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-bame-pink focus:border-transparent transition"
+                        class="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-bame-pink focus:border-transparent transition text-sm sm:text-base"
                         placeholder="Enter your email"
                         required
                     >
@@ -59,7 +59,7 @@
                             type="{{ $showPassword ? 'text' : 'password' }}" 
                             id="password" 
                             wire:model="password"
-                            class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-bame-pink focus:border-transparent transition pr-12"
+                            class="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-bame-pink focus:border-transparent transition pr-12 text-sm sm:text-base"
                             placeholder="Enter your password"
                             required
                         >
@@ -95,7 +95,7 @@
                 <!-- Login Button -->
                 <button 
                     type="submit"
-                    class="w-full bg-bame-pink hover:bg-pink-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-bame-pink focus:ring-offset-2 focus:ring-offset-gray-900"
+                    class="w-full bg-bame-pink hover:bg-pink-600 text-white font-semibold py-2.5 sm:py-3 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-bame-pink focus:ring-offset-2 focus:ring-offset-gray-900 text-sm sm:text-base"
                     wire:loading.attr="disabled"
                 >
                     <span wire:loading.remove>Login</span>

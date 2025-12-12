@@ -30,12 +30,25 @@
         }
     </style>
 </head>
-<body class="bg-gray-50 antialiased">
+<body class="bg-gray-50 antialiased" x-data="{ sidebarOpen: false }">
     <div class="flex h-screen overflow-hidden">
+        <!-- Mobile Sidebar Overlay -->
+        <div x-show="sidebarOpen" 
+             x-transition:enter="transition-opacity ease-linear duration-300"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="transition-opacity ease-linear duration-300"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="fixed inset-0 z-40 bg-gray-600 bg-opacity-75 lg:hidden"
+             @click="sidebarOpen = false"
+             style="display: none;"></div>
+
         <!-- Sidebar - Light Theme -->
-        <aside class="w-64 bg-white flex flex-col border-r border-gray-200">
+        <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
+               class="fixed inset-y-0 left-0 z-50 w-64 bg-white flex flex-col border-r border-gray-200 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-auto">
             <!-- Logo -->
-            <div class="h-16 flex items-center px-5 border-b border-gray-100">
+            <div class="h-16 flex items-center justify-between px-5 border-b border-gray-100">
                 <div class="flex items-center space-x-3">
                     <div class="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-xs shadow-md" style="background: linear-gradient(135deg, #6B46C1 0%, #553C9A 100%);">
                         BAME
@@ -45,6 +58,12 @@
                         <div class="text-xs text-gray-500">Sponsorship Platform</div>
                     </div>
                 </div>
+                <!-- Close button for mobile -->
+                <button @click="sidebarOpen = false" class="lg:hidden p-2 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
             </div>
 
             <!-- Navigation -->
@@ -175,14 +194,20 @@
         <!-- Main Content -->
         <div class="flex-1 flex flex-col overflow-hidden">
             <!-- Top Header -->
-            <header class="h-16 bg-white border-b border-gray-100 flex items-center justify-between px-6">
-                <div>
+            <header class="h-16 bg-white border-b border-gray-100 flex items-center justify-between px-4 lg:px-6">
+                <!-- Mobile menu button -->
+                <button @click="sidebarOpen = true" class="lg:hidden p-2 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 -ml-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+                <div class="hidden lg:block">
                     <h1 class="text-lg font-semibold text-gray-900">{{ $header ?? 'Dashboard' }}</h1>
                 </div>
-                <div class="flex items-center space-x-3">
-                    <!-- Search -->
-                    <div class="relative">
-                        <input type="search" placeholder="Search..." class="w-64 pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-400 focus:bg-white transition-all">
+                <div class="flex items-center space-x-2 lg:space-x-3">
+                    <!-- Search - Hidden on mobile, visible on tablet+ -->
+                    <div class="relative hidden md:block">
+                        <input type="search" placeholder="Search..." class="w-48 lg:w-64 pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-400 focus:bg-white transition-all">
                         <svg class="w-4 h-4 text-gray-400 absolute left-3.5 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                         </svg>
@@ -196,12 +221,12 @@
                         <span class="absolute top-1 right-1 w-2 h-2 bg-purple-500 rounded-full"></span>
                     </button>
 
-                    <!-- Divider -->
-                    <div class="h-8 w-px bg-gray-200"></div>
+                    <!-- Divider - Hidden on mobile -->
+                    <div class="h-8 w-px bg-gray-200 hidden md:block"></div>
 
                     <!-- User Avatar -->
                     <div class="flex items-center gap-2">
-                        <div class="text-right hidden sm:block">
+                        <div class="text-right hidden lg:block">
                             <p class="text-sm font-medium text-gray-900">{{ auth()->user()->name }}</p>
                             <p class="text-xs text-gray-500 capitalize">{{ auth()->user()->role }}</p>
                         </div>
@@ -213,7 +238,7 @@
             </header>
 
             <!-- Page Content -->
-            <main class="flex-1 overflow-y-auto bg-gray-50 px-6 py-6">
+            <main class="flex-1 overflow-y-auto bg-gray-50 px-4 py-4 lg:px-6 lg:py-6">
                 {{ $slot }}
             </main>
         </div>
