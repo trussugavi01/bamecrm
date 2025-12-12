@@ -183,10 +183,10 @@ In the **Health Check** tab:
 In the **Build** tab, add this post-deployment command:
 
 ```bash
-php artisan migrate --force && php artisan setup:production
+php artisan migrate:fresh --force && php artisan setup:production
 ```
 
-**Note:** This will run migrations and setup default users and pipelines. After the first deployment, you may want to remove the setup part:
+**Note:** This will drop all tables and re-run migrations, then setup default users and pipelines. For subsequent deployments after initial setup, change to:
 
 ```bash
 php artisan migrate --force
