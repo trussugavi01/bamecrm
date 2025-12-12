@@ -12,48 +12,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('tasks', function (Blueprint $table) {
-            // Add new columns if they don't exist
-            if (!Schema::hasColumn('tasks', 'owner_id')) {
-                // Add as nullable first, then update and make not null
-                $table->unsignedBigInteger('owner_id')->nullable()->after('sponsorship_id');
-            }
-            if (!Schema::hasColumn('tasks', 'created_by')) {
-                $table->unsignedBigInteger('created_by')->nullable()->after('owner_id');
-            }
-            if (!Schema::hasColumn('tasks', 'is_automated')) {
-                $table->boolean('is_automated')->default(false)->after('completed_at');
-            }
-            if (!Schema::hasColumn('tasks', 'automation_type')) {
-                $table->string('automation_type')->nullable()->after('is_automated');
-            }
-        });
-
-        // Update existing tasks to set owner_id from assigned_to or user_id
-        DB::statement('UPDATE tasks SET owner_id = COALESCE(assigned_to, user_id, 1) WHERE owner_id IS NULL');
-        
-        // Now make owner_id not nullable and add foreign keys
-        Schema::table('tasks', function (Blueprint $table) {
-            if (Schema::hasColumn('tasks', 'owner_id')) {
-                // Make owner_id not nullable
-                DB::statement('ALTER TABLE tasks MODIFY owner_id BIGINT UNSIGNED NOT NULL');
-                
-                // Add foreign key constraints if they don't exist
-                try {
-                    $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
-                } catch (\Exception $e) {
-                    // Foreign key might already exist
-                }
-            }
-            
-            if (Schema::hasColumn('tasks', 'created_by')) {
-                try {
-                    $table->foreign('created_by')->references('id')->on('users')->onDelete('set null');
-                } catch (\Exception $e) {
-                    // Foreign key might already exist
-                }
-            }
-        });
+        // This migration is no longer needed as the create_tasks_table migration
+        // already includes all these columns (owner_id, created_by, is_automated, automation_type)
+        // Keeping this migration empty to maintain migration history
     }
 
     /**
