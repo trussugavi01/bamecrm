@@ -37,21 +37,13 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // Tasks for follow-ups
-        Schema::create('tasks', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('assigned_to')->nullable()->constrained('users')->onDelete('set null');
-            $table->foreignId('sponsorship_id')->nullable()->constrained()->onDelete('cascade');
-            $table->foreignId('workflow_id')->nullable()->constrained()->onDelete('set null');
-            $table->string('title');
-            $table->text('description')->nullable();
-            $table->date('due_date')->nullable();
-            $table->string('priority')->default('medium'); // low, medium, high
-            $table->string('status')->default('pending'); // pending, in_progress, completed
-            $table->timestamp('completed_at')->nullable();
-            $table->timestamps();
-        });
+        // Tasks table is created by 2024_12_11_000002_create_tasks_table.php
+        // Adding workflow_id column to existing tasks table
+        if (!Schema::hasColumn('tasks', 'workflow_id')) {
+            Schema::table('tasks', function (Blueprint $table) {
+                $table->foreignId('workflow_id')->nullable()->after('sponsorship_id')->constrained()->onDelete('set null');
+            });
+        }
 
         // In-app notifications
         Schema::create('notifications', function (Blueprint $table) {
@@ -73,7 +65,15 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('notifications');
-        Schema::dropIfExists('tasks');
+        
+        // Remove workflow_id column from tasks table
+        if (Schema::hasColumn('tasks', 'workflow_id')) {
+            Schema::table('tasks', function (Blueprint $table) {
+                $table->dropForeign(['workflow_id']);
+                $table->dropColumn('workflow_id');
+            });
+        }
+        
         Schema::dropIfExists('workflow_logs');
         Schema::dropIfExists('workflows');
     }
