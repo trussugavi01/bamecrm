@@ -183,10 +183,10 @@ In the **Health Check** tab:
 In the **Build** tab, add this post-deployment command:
 
 ```bash
-php artisan migrate:fresh --force && php artisan setup:production
+php artisan config:clear && php artisan cache:clear && rm -f database/database.sqlite && touch database/database.sqlite && php artisan migrate --force && php artisan setup:production
 ```
 
-**Note:** This will drop all tables and re-run migrations, then setup default users and pipelines. For subsequent deployments after initial setup, change to:
+**Note:** This will clear caches, recreate the database file, run migrations, and setup default users and pipelines. For subsequent deployments after initial setup, change to:
 
 ```bash
 php artisan migrate --force

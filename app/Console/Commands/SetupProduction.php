@@ -15,6 +15,12 @@ class SetupProduction extends Command
     {
         $this->info('Setting up production environment...');
 
+        // Check if users table exists
+        if (!\Schema::hasTable('users')) {
+            $this->error('Users table does not exist. Please run migrations first.');
+            return 1;
+        }
+
         // Create default users
         $this->info('Creating default users...');
         
