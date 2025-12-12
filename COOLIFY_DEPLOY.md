@@ -183,10 +183,10 @@ In the **Health Check** tab:
 In the **Build** tab, add this post-deployment command:
 
 ```bash
-rm -f database/database.sqlite && touch database/database.sqlite && php artisan migrate --force && php artisan setup:production
+rm -f /app/database/database.sqlite && php artisan migrate --force && php artisan setup:production
 ```
 
-**Note:** This will recreate the database file, run migrations, and setup default users and pipelines. For subsequent deployments after initial setup, change to:
+**Note:** This will delete the database file from persistent storage, run migrations (which will create a fresh database), and setup default users and pipelines. For subsequent deployments after initial setup, change to:
 
 ```bash
 php artisan migrate --force
