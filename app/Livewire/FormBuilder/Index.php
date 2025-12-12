@@ -49,6 +49,7 @@ class Index extends Component
 
     public function openCreateModal()
     {
+        \Log::info('FormBuilder: openCreateModal called');
         $this->reset(['name', 'redirect_url', 'editingFormId']);
         $this->submit_button_text = 'Submit Inquiry';
         $this->success_message = 'Thank you for your interest! We will be in touch soon.';

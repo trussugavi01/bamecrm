@@ -5,7 +5,7 @@
             <h1 class="text-2xl font-bold text-gray-900">Form Builder</h1>
             <p class="text-gray-500 mt-1">Create and manage public sponsorship interest forms.</p>
         </div>
-        <button wire:click="openCreateModal" class="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-all shadow-sm">
+        <button type="button" wire:click="openCreateModal" class="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-all shadow-sm">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
             </svg>
@@ -116,7 +116,7 @@
                 </div>
                 <p class="text-sm text-gray-600 font-medium mb-2">No forms created yet</p>
                 <p class="text-xs text-gray-400 mb-4">Create your first form to start collecting leads</p>
-                <button wire:click="openCreateModal" class="inline-flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium rounded-lg transition-all shadow-sm">
+                <button type="button" wire:click="openCreateModal" class="inline-flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium rounded-lg transition-all shadow-sm">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                     </svg>
@@ -134,7 +134,7 @@
             x-transition:enter="transition ease-out duration-300"
             x-transition:enter-start="opacity-0"
             x-transition:enter-end="opacity-100"
-            class="fixed inset-0 z-50 overflow-y-auto"
+            class="fixed inset-0 z-[60] overflow-y-auto"
         >
             <!-- Backdrop -->
             <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" wire:click="closeModal"></div>
