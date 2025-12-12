@@ -1,4 +1,4 @@
-# Deployment configuration for Coolify
+# Deployment configuration for Coolify - v2
 [phases.setup]
 nixPkgs = ['php82', 'php82Packages.composer', 'nodejs_20', 'sqlite']
 
