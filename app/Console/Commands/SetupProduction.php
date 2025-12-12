@@ -62,6 +62,9 @@ class SetupProduction extends Command
 
         $this->info('Default users created successfully!');
 
+        // Get admin user for pipeline ownership
+        $adminUser = User::where('email', 'admin@bamecrm.com')->first();
+
         // Create default pipelines
         $this->info('Creating default pipelines...');
         
@@ -69,38 +72,32 @@ class SetupProduction extends Command
             [
                 'name' => 'New Lead',
                 'description' => 'Initial contact stage',
-                'order' => 1,
-                'color' => '#3B82F6',
+                'user_id' => $adminUser->id,
             ],
             [
                 'name' => 'Qualification',
                 'description' => 'Qualifying the lead',
-                'order' => 2,
-                'color' => '#8B5CF6',
+                'user_id' => $adminUser->id,
             ],
             [
                 'name' => 'Proposal',
                 'description' => 'Proposal sent',
-                'order' => 3,
-                'color' => '#EC4899',
+                'user_id' => $adminUser->id,
             ],
             [
                 'name' => 'Negotiation',
                 'description' => 'In negotiation',
-                'order' => 4,
-                'color' => '#F59E0B',
+                'user_id' => $adminUser->id,
             ],
             [
                 'name' => 'Closed Won',
                 'description' => 'Successfully closed',
-                'order' => 5,
-                'color' => '#10B981',
+                'user_id' => $adminUser->id,
             ],
             [
                 'name' => 'Closed Lost',
                 'description' => 'Lost opportunity',
-                'order' => 6,
-                'color' => '#EF4444',
+                'user_id' => $adminUser->id,
             ],
         ];
 
