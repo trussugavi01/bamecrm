@@ -15,6 +15,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'api.key' => \App\Http\Middleware\ApiKeyMiddleware::class,
         ]);
         
+        // Trust all proxies (Coolify/Caddy reverse proxy)
+        $middleware->trustProxies(at: '*');
+        
         // Add security middleware to web routes
         $middleware->web(append: [
             \App\Http\Middleware\ForceHttps::class,
