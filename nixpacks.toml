@@ -12,6 +12,7 @@ cmds = [
 [phases.build]
 cmds = [
   'touch database/database.sqlite',
+  'composer dump-autoload --optimize',
   'php artisan config:cache',
   'php artisan route:cache',
   'php artisan view:cache'
