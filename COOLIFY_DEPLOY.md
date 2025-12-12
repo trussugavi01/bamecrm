@@ -183,20 +183,19 @@ In the **Health Check** tab:
 In the **Build** tab, add this post-deployment command:
 
 ```bash
-php artisan migrate:fresh --force && php artisan setup:production
+php artisan migrate:fresh --force --seed --seeder=DatabaseSeeder
 ```
 
-**Note:** This will drop all tables and re-run all migrations, then setup default users and pipelines. For subsequent deployments after initial setup, change to:
+**Note:** This will drop all tables, re-run all migrations, and seed the database with default data. For subsequent deployments after initial setup, change to:
 
 ```bash
 php artisan migrate --force
 ```
 
-**Important:** If you need to completely reset the database, you can manually delete the database file via Coolify terminal:
-```bash
-rm -f /app/database/database.sqlite
-```
-Then redeploy.
+**Important:** If migrations aren't running, check that:
+- Environment variable `DB_DATABASE=/app/database/database.sqlite` is set
+- The `/database` persistent storage is mounted correctly
+- Migration files exist in `/app/database/migrations/`
 
 ### 10. Deploy!
 
