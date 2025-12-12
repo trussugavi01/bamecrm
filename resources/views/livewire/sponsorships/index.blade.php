@@ -1,4 +1,5 @@
-<div x-data="{ viewMode: window.innerWidth < 768 ? 'list' : 'kanban' }" x-init="window.addEventListener('resize', () => { if(window.innerWidth < 768 && viewMode === 'kanban') viewMode = 'list'; })">
+<div>
+    <div x-data="{ viewMode: window.innerWidth < 768 ? 'list' : 'kanban' }" x-init="window.addEventListener('resize', () => { if(window.innerWidth < 768 && viewMode === 'kanban') viewMode = 'list'; })">
     <!-- Header -->
     <div class="mb-4 sm:mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
@@ -8,14 +9,14 @@
         <div class="flex items-center gap-2">
             <!-- View Toggle - Mobile Only -->
             <div class="md:hidden inline-flex rounded-lg bg-gray-100 p-1">
-                <button @click="viewMode = 'list'" :class="viewMode === 'list' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500'" class="px-3 py-1.5 text-xs font-medium rounded-md transition">
+                <button type="button" @click="viewMode = 'list'" :class="viewMode === 'list' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500'" class="px-3 py-1.5 text-xs font-medium rounded-md transition">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
                 </button>
-                <button @click="viewMode = 'kanban'" :class="viewMode === 'kanban' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500'" class="px-3 py-1.5 text-xs font-medium rounded-md transition">
+                <button type="button" @click="viewMode = 'kanban'" :class="viewMode === 'kanban' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500'" class="px-3 py-1.5 text-xs font-medium rounded-md transition">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/></svg>
                 </button>
             </div>
-            <button wire:click="openCreateModal" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-3 sm:px-4 rounded-lg flex items-center text-sm">
+            <button type="button" wire:click="openCreateModal" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-3 sm:px-4 rounded-lg flex items-center text-sm">
                 <svg class="w-4 h-4 sm:w-5 sm:h-5 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                 </svg>
@@ -38,7 +39,7 @@
     @endif
 
     <!-- Kanban Board - Desktop/Tablet -->
-    <div x-show="viewMode === 'kanban'" class="hidden md:flex space-x-4 overflow-x-auto pb-4 -mx-4 px-4 lg:mx-0 lg:px-0">
+    <div class="hidden md:flex space-x-4 overflow-x-auto pb-4 -mx-4 px-4 lg:mx-0 lg:px-0">
         @foreach($stages as $stage)
             <div class="flex-shrink-0 w-72 lg:w-80">
                 <!-- Column Header -->
@@ -125,7 +126,7 @@
     </div>
 
     <!-- Mobile Kanban View -->
-    <div x-show="viewMode === 'kanban'" class="md:hidden flex space-x-3 overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory">
+    <div x-show="viewMode === 'kanban'" x-cloak class="md:hidden space-x-3 overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory" :class="viewMode === 'kanban' ? 'flex' : 'hidden'">
         @foreach($stages as $stage)
             <div class="flex-shrink-0 w-[85vw] snap-center">
                 <!-- Column Header -->
@@ -175,7 +176,7 @@
     </div>
 
     <!-- Mobile List View -->
-    <div x-show="viewMode === 'list'" class="md:hidden space-y-4">
+    <div x-show="viewMode === 'list'" x-cloak class="md:hidden space-y-4">
         @foreach($stages as $stage)
             @if($stageCounts[$stage] > 0)
             <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
@@ -229,7 +230,7 @@
                 </div>
                 <h3 class="text-lg font-semibold text-gray-900 mb-1">No deals yet</h3>
                 <p class="text-sm text-gray-500 mb-4">Create your first sponsorship deal</p>
-                <button wire:click="openCreateModal" class="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg text-sm">
+                <button type="button" wire:click="openCreateModal" class="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg text-sm">
                     Create Deal
                 </button>
             </div>
@@ -240,4 +241,5 @@
     @if($showModal)
         <livewire:sponsorships.deal-modal :dealId="$selectedDeal" wire:key="deal-modal-{{ $selectedDeal ?? 'new' }}-{{ now()->timestamp }}" />
     @endif
+    </div>
 </div>

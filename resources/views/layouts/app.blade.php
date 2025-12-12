@@ -10,6 +10,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
     <style>
+        [x-cloak] { display: none !important; }
         .nav-item-active {
             background: linear-gradient(90deg, rgba(107, 70, 193, 0.12) 0%, rgba(107, 70, 193, 0.05) 100%);
             border-left: 3px solid #6B46C1;
