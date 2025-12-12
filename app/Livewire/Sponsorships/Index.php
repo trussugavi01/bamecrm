@@ -38,8 +38,10 @@ class Index extends Component
 
     public function openCreateModal()
     {
+        \Log::info('openCreateModal called');
         $this->selectedDeal = null;
         $this->showModal = true;
+        \Log::info('showModal set to: ' . $this->showModal);
     }
 
     #[On('close-modal')]

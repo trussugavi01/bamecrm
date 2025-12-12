@@ -1,4 +1,4 @@
-<div class="fixed inset-0 z-50 overflow-y-auto">
+<div class="fixed inset-0 z-[60] overflow-y-auto">
     <!-- Backdrop -->
     <div class="fixed inset-0 bg-black bg-opacity-50" wire:click="close"></div>
 

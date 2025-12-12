@@ -170,6 +170,7 @@
     </div>
 
     <!-- Deal Modal Component -->
+    <!-- Debug: showModal = {{ $showModal ? 'true' : 'false' }} -->
     @if($showModal)
         <livewire:sponsorships.deal-modal :dealId="$selectedDeal" wire:key="deal-modal-{{ $selectedDeal ?? 'new' }}-{{ now()->timestamp }}" />
     @endif
