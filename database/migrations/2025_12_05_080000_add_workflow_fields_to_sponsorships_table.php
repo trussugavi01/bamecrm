@@ -30,10 +30,24 @@ return new class extends Migration
             }
             
             // Add indexes for performance
-            $table->index('stage_entry_date');
-            $table->index('last_activity_date');
-            $table->index('next_follow_up_date');
-            $table->index(['stage', 'last_activity_date']);
+            // Indexes already exist, commenting out to unblock migration
+            /*
+            try {
+                $table->index('stage_entry_date');
+            } catch (\Exception $e) {}
+            
+            try {
+                $table->index('last_activity_date');
+            } catch (\Exception $e) {}
+            
+            try {
+                $table->index('next_follow_up_date');
+            } catch (\Exception $e) {}
+            
+            try {
+                $table->index(['stage', 'last_activity_date']);
+            } catch (\Exception $e) {}
+            */
         });
     }
 

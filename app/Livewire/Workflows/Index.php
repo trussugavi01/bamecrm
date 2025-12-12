@@ -159,7 +159,8 @@ class Index extends Component
         ]);
 
         $data = [
-            'user_id' => auth()->id(),
+            'owner_id' => auth()->id(),
+            'created_by' => auth()->id(),
             'title' => $this->taskTitle,
             'description' => $this->taskDescription,
             'due_date' => $this->taskDueDate ?: null,
@@ -236,7 +237,7 @@ class Index extends Component
 
         $completedTasks = Task::with(['assignee', 'sponsorship'])
             ->where(function($query) {
-                $query->where('user_id', auth()->id())
+                $query->where('owner_id', auth()->id())
                     ->orWhere('assigned_to', auth()->id());
             })
             ->where('status', Task::STATUS_COMPLETED)
