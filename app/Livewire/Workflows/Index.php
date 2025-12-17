@@ -228,7 +228,7 @@ class Index extends Component
 
         $tasks = Task::with(['assignee', 'sponsorship'])
             ->where(function($query) {
-                $query->where('user_id', auth()->id())
+                $query->where('owner_id', auth()->id())
                     ->orWhere('assigned_to', auth()->id());
             })
             ->where('status', '!=', Task::STATUS_COMPLETED)
