@@ -17,6 +17,7 @@ return new class extends Migration
                 $table->foreignId('sponsorship_id')->constrained()->onDelete('cascade');
                 $table->foreignId('owner_id')->constrained('users')->onDelete('cascade');
                 $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('set null');
+                $table->foreignId('assigned_to')->nullable()->constrained('users')->onDelete('set null');
                 $table->string('title');
                 $table->text('description')->nullable();
                 $table->enum('status', ['pending', 'in_progress', 'completed', 'cancelled'])->default('pending');

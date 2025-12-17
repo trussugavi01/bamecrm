@@ -57,7 +57,7 @@ return new class extends Migration
 
         // Tasks table indexes
         Schema::table('tasks', function (Blueprint $table) {
-            $table->index('user_id', 'idx_tasks_user_id');
+            $table->index('owner_id', 'idx_tasks_owner_id');
             $table->index('assigned_to', 'idx_tasks_assigned_to');
             $table->index('sponsorship_id', 'idx_tasks_sponsorship_id');
             $table->index('status', 'idx_tasks_status');
@@ -133,7 +133,7 @@ return new class extends Migration
 
         // Tasks table indexes
         Schema::table('tasks', function (Blueprint $table) {
-            $table->dropIndex('idx_tasks_user_id');
+            $table->dropIndex('idx_tasks_owner_id');
             $table->dropIndex('idx_tasks_assigned_to');
             $table->dropIndex('idx_tasks_sponsorship_id');
             $table->dropIndex('idx_tasks_status');
